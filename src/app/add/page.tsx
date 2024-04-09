@@ -11,7 +11,13 @@ import { CircleArrowLeft } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import Link from 'next/link';
 import api from '@/lib/axiosInstance';
-
+const defaultValues = {
+  name: '',
+  contact: '',
+  amount: '',
+  recipientName: '',
+  recipientType: '',
+};
 const formSchema = z.object({
   name: z.string().min(1, { message: 'Donor name required' }),
   contact: z.string().min(1, { message: 'Donor contact required' }),
@@ -52,6 +58,7 @@ const Page = () => {
         title: 'Donation Recieved',
         description: `Donation of GHS ${data.amount} recieved from ${data.name}`,
       });
+      form.reset(defaultValues);
     } catch (error) {
       toast({
         title: 'Donation Failed',
