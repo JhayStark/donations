@@ -38,7 +38,7 @@ const StatsCard = ({
       <p
         className={`${textColor} lg:text-[0.790rem] xl:text-[0.901rem] 2xl:text-[1.145rem]`}
       >
-        {value ?? 0}
+        {value}
       </p>
     </div>
   </div>
@@ -66,14 +66,18 @@ export default function Home() {
           title='Total Donations'
           hexcode='bg-[#043F2E]'
           textColor='text-[#FFFFE2]'
-          value={formatCurrencyToGHS(statsData?.total)}
+          value={formatCurrencyToGHS(statsData?.total) || 'GHS 0'}
           icon={<BadgeCent className='text-white' />}
         />
         <StatsCard
           title='Total Donors'
           hexcode='border-[#FFD249] border-2 bg-inherit'
           textColor='text-white'
-          value={new Intl.NumberFormat().format(statsData?.count)}
+          value={
+            statsData?.count
+              ? new Intl.NumberFormat().format(statsData?.count)
+              : 0
+          }
           icon={<UsersRound />}
         />
       </div>

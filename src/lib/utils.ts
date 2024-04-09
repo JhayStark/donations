@@ -5,10 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrencyToGHS(amount: number): string | boolean {
+export function formatCurrencyToGHS(amount: number): string {
   // Check if amount is a valid number
   if (isNaN(amount)) {
-    return false;
+    return 'GHS 0';
   }
 
   // Format the amount with 2 decimal places
@@ -18,5 +18,5 @@ export function formatCurrencyToGHS(amount: number): string | boolean {
   const parts = formattedAmount.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  return `GHS ${parts.join('.')}`;
+  return `GHS${parts.join('.')}`;
 }
