@@ -53,9 +53,9 @@ const DatatableBase = ({
         )}
         <TableHeader>
           <TableRow>
-            <TableHead>Donor Name</TableHead>
-            <TableHead>Recipient</TableHead>
-            <TableHead className='text-right'>Amount</TableHead>
+            <TableHead className='text-white'>Donor Name</TableHead>
+            <TableHead className='text-white'>Recipient</TableHead>
+            <TableHead className='text-right text-white'>Amount</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

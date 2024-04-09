@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={cn(
-          'h-screen bg-background font-sans antialiased  bg-[#FFFFE2]',
+          'h-screen bg-background font-sans antialiased  bg-gray-800 text-white',
           garamond.variable
         )}
       >

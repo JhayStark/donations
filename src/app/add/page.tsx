@@ -131,7 +131,10 @@ const Page = () => {
             )}
         </div>
 
-        <Button className='bg-[#043F2E] w-full h-16' type='submit'>
+        <Button
+          className='bg-white text-black hover:text-white w-full h-16'
+          type='submit'
+        >
           Recieve Donation
         </Button>
       </form>

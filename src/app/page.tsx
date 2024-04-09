@@ -71,8 +71,8 @@ export default function Home() {
         />
         <StatsCard
           title='Total Donors'
-          hexcode='bg-[#FFD249]'
-          textColor='text-[#1E1E1E]'
+          hexcode='border-[#FFD249] border-2 bg-inherit'
+          textColor='text-white'
           value={new Intl.NumberFormat().format(statsData?.count)}
           icon={<UsersRound />}
         />

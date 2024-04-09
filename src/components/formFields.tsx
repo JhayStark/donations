@@ -45,7 +45,7 @@ export const InputFormField = ({
                 type={type}
                 disabled={disabled}
                 placeholder={placeholder}
-                className='bg-transparent border-0 border-b-2 rounded-none border-[#043F2E]'
+                className='bg-transparent border-0 border-b-2 rounded-none border-white'
                 autoComplete='off'
               />
             </FormControl>
@@ -84,11 +84,11 @@ export const SelectFormField = ({
           <div>
             <Select {...field} onValueChange={field.onChange}>
               <FormControl>
-                <SelectTrigger className='bg-transparent border-0 border-b-2 rounded-none border-[#043F2E]'>
+                <SelectTrigger className='bg-transparent border-0 border-b-2 rounded-none border-white'>
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className='bg-[#FFFFE2]'>
+              <SelectContent className='bg-inherit text-white'>
                 {options.map(option => (
                   <SelectItem key={option} value={option}>
                     {option}
