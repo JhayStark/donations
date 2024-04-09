@@ -120,7 +120,7 @@ const Page = () => {
           {renderSelectField(
             'Recipient Type',
             'recipientType',
-            ['Family', 'Spouse', 'Individual (Enter name below)'],
+            ['Family', 'Spouse', 'Children', 'Individual (Enter name below)'],
             'Select recipient type'
           )}
           {form.watch('recipientType').includes('Individual') &&
