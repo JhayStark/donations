@@ -111,13 +111,13 @@ const Page = () => {
         </h1>
       </div>
       <form
-        className='w-full mx-auto max-w-3xl h-[85%] flex-grow flex flex-col justify-between'
+        className='w-full mx-auto max-w-3xl h-[80%]  md:h-[85%] flex-grow flex flex-col justify-between'
         onSubmit={form.handleSubmit(submitForm)}
         autoComplete='off'
       >
         <div className='space-y-10'>
           {renderInputField('Donor Name', 'name', 'Enter name of donor')}
-          {renderInputField('Donor Contact', 'contact', '02412345678')}
+          {renderInputField('Donor Contact', 'contact', '0240000017')}
           {renderInputField(
             'Amount',
             'amount',
