@@ -5,30 +5,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrencyToGHS(amount: number): string {
-  // Check if the input is a valid number
+export function formatCurrencyToGHS(amount: number): string | boolean {
+  // Check if amount is a valid number
   if (isNaN(amount)) {
-    return '0';
+    return false;
   }
 
-  // Use Intl.NumberFormat to format the number into Ghanaian Cedi currency
-  const formatter = new Intl.NumberFormat('en-GH', {
-    style: 'currency',
-    currency: 'GHS',
-  });
+  // Format the amount with 2 decimal places
+  const formattedAmount = amount.toFixed(2);
 
-  // Format the number into Ghanaian Cedi currency
-  const formattedString = formatter.format(amount);
+  // Add currency symbol and commas for thousands separator
+  const parts = formattedAmount.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  // Manually remove the currency code prefix ("GH") if present
-  const currencySymbol = '₵'; // Ghanaian Cedi symbol
-  const currencyCodePrefix = 'GH';
-
-  if (formattedString.startsWith(currencyCodePrefix)) {
-    // Remove the currency code prefix and trim any leading whitespace
-    return formattedString.substring(currencyCodePrefix.length).trim();
-  }
-
-  // If the prefix is not found, return the formatted string as is
-  return formattedString;
+  return `GHS ${parts.join('.')}`;
 }
