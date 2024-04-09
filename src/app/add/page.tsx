@@ -116,8 +116,8 @@ const Page = () => {
         autoComplete='off'
       >
         <div className='space-y-10'>
-          {renderInputField('Name', 'name', 'Enter name of donor')}
-          {renderInputField('Contact', 'contact', 'Enter contact of donor')}
+          {renderInputField('Donor Name', 'name', 'Enter name of donor')}
+          {renderInputField('Donor Contact', 'contact', '02412345678')}
           {renderInputField(
             'Amount',
             'amount',
