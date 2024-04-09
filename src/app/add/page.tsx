@@ -100,11 +100,11 @@ const Page = () => {
           </button>
         </Link>
         <h1 className='text-lg lg:text-3xl font-semibold text-center'>
-          Recieve Donation
+          Donation Form
         </h1>
       </div>
       <form
-        className='w-full mx-auto max-w-3xl h-[90%] flex-grow flex flex-col justify-between'
+        className='w-full mx-auto max-w-3xl h-[85%] flex-grow flex flex-col justify-between'
         onSubmit={form.handleSubmit(submitForm)}
         autoComplete='off'
       >
