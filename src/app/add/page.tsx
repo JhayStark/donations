@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -40,6 +40,7 @@ const formSchema = z.object({
 });
 
 const Page = () => {
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,12 +53,14 @@ const Page = () => {
   });
   const { toast } = useToast();
   const submitForm = async (data: z.infer<typeof formSchema>) => {
+    setLoading(true);
     try {
       await api.post('/donations/add', data);
       toast({
         title: 'Donation Recieved',
         description: `Donation of GHS ${data.amount} recieved from ${data.name}`,
       });
+      setLoading(false);
       form.reset(defaultValues);
     } catch (error) {
       toast({
@@ -65,6 +68,7 @@ const Page = () => {
         description: `Donation of GHS ${data.amount} failed from ${data.name}`,
         variant: 'destructive',
       });
+      setLoading(false);
     }
   };
 
@@ -142,7 +146,18 @@ const Page = () => {
           className='bg-white text-black hover:text-white w-full h-16'
           type='submit'
         >
-          Recieve Donation
+          {!loading ? (
+            'Recieve Donation'
+          ) : (
+            <div
+              className='inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
+              role='status'
+            >
+              <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
+                Loading...
+              </span>
+            </div>
+          )}
         </Button>
       </form>
     </Form>
