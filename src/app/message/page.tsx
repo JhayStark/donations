@@ -24,7 +24,7 @@ const Page = () => {
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
-    api
+    await api
       .post('/donations/send-sms', data)
       .then(() => setLoading(false))
       .catch(() => setLoading(false));
