@@ -54,7 +54,7 @@ const Page = () => {
           <Label>Sample Message</Label>
           <p className='min-h-20 min-w-full border-white border-2 rounded p-2'>
             {form.watch('message')?.includes('$name$')
-              ? form.watch('message').replace('$name$', 'Kwesi Tenkorang')
+              ? form.watch('message').replaceAll('$name$', 'Kwesi Tenkorang')
               : form.watch('message')}
           </p>
         </div>
