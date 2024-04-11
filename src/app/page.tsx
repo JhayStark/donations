@@ -7,6 +7,7 @@ import DatatableBase from './DatatableBase';
 import api from '@/lib/axiosInstance';
 import useSWR from 'swr';
 import { formatCurrencyToGHS } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const fetcher = (url: string) => api.get(url).then(res => res.data);
 
@@ -81,7 +82,9 @@ export default function Home() {
           icon={<UsersRound />}
         />
       </div>
-
+      <Link href={'/message'}>
+        <Button className='bg-blue-950 my-5'>Send thank you message</Button>
+      </Link>
       <DatatableBase
         data={data}
         setPageNumber={setPageNumber}

@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -13,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from './ui/textarea';
 
 interface InputFormFieldProps {
   form: any;
@@ -21,6 +23,10 @@ interface InputFormFieldProps {
   placeholder?: string;
   disabled?: boolean;
   type?: string;
+}
+
+interface TextareaFormField extends InputFormFieldProps {
+  description?: string;
 }
 
 export const InputFormField = ({
@@ -46,6 +52,41 @@ export const InputFormField = ({
                 disabled={disabled}
                 placeholder={placeholder}
                 className='bg-transparent border-0 border-b-2 rounded-none border-white'
+                autoComplete='off'
+              />
+            </FormControl>
+            <FormMessage />
+          </div>
+        </FormItem>
+      )}
+    />
+  );
+};
+
+export const TextareaFormField = ({
+  form,
+  name,
+  label,
+  type = 'text',
+  disabled = false,
+  placeholder,
+  description,
+}: TextareaFormField) => {
+  return (
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <FormDescription>{description}</FormDescription>
+          <div>
+            <FormControl>
+              <Textarea
+                {...field}
+                disabled={disabled}
+                placeholder={placeholder}
+                className='bg-transparent border-white'
                 autoComplete='off'
               />
             </FormControl>
