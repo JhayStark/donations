@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import api from '@/lib/axiosInstance';
 import Link from 'next/link';
 import { CircleArrowLeft } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 const formSchema = z.object({
   message: z.string().min(1),
@@ -22,12 +23,25 @@ const Page = () => {
     resolver: zodResolver(formSchema),
   });
 
+  const { toast } = useToast();
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
     await api
       .post('/donations/send-sms', data)
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false));
+      .then(() => {
+        setLoading(false);
+        toast({
+          title: 'Messages Sent',
+          description: `Thank you messages sent`,
+        });
+      })
+      .catch(() => {
+        setLoading(false);
+        toast({
+          title: 'Failed',
+          description: `Failed to send messages`,
+        });
+      });
   };
   return (
     <Form {...form}>
