@@ -78,48 +78,73 @@ const DatatableBase = ({
           <DropdownMenuContent>
             <DropdownMenuItem
               onClick={() => {
-                if (sort == 'sortField=name&sortOrder=asc') {
+                if (sort.includes('asc') && sort.includes('name')) {
                   setSort('sortField=name&sortOrder=desc');
                 } else setSort('sortField=name&sortOrder=asc');
               }}
             >
-              Name
+              Name{' '}
+              <span className='cursor-pointer font-semibold text-gray-800'>
+                {sort.includes('asc') && sort.includes('name')
+                  ? ' (DSC ▲)'
+                  : '(ASC ▼)'}
+              </span>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
-                if (sort == 'sortField=amount&sortOrder=asc') {
+                if (sort.includes('asc') && sort.includes('amount')) {
                   setSort('sortField=amount&sortOrder=desc');
                 } else setSort('sortField=amount&sortOrder=asc');
               }}
             >
-              Amount
+              Amount{' '}
+              <span className='cursor-pointer font-semibold text-gray-800'>
+                {sort.includes('asc') && sort.includes('amount')
+                  ? ' (DSC ▲)'
+                  : '(ASC ▼)'}
+              </span>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
-                if (sort == 'sortField=contact&sortOrder=asc') {
+                if (sort.includes('asc') && sort.includes('contact')) {
                   setSort('sortField=contact&sortOrder=desc');
                 } else setSort('sortField=contact&sortOrder=asc');
               }}
             >
-              Contact
+              Contact{' '}
+              <span className='cursor-pointer font-semibold text-gray-800'>
+                {sort.includes('asc') && sort.includes('contact')
+                  ? ' (DSC ▲)'
+                  : '(ASC ▼)'}
+              </span>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
-                if (sort === 'sortField=createdOn&sortOrder=asc') {
+                if (sort.includes('asc') && sort.includes('createdOn')) {
                   setSort('sortField=createdOn&sortOrder=desc');
                 } else setSort('sortField=createdOn&sortOrder=asc');
               }}
             >
-              Date Created
+              Date{' '}
+              <span className='cursor-pointer font-semibold text-gray-800'>
+                {sort.includes('asc') && sort.includes('createdOn')
+                  ? ' (DSC ▲)'
+                  : '(ASC ▼)'}
+              </span>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
-                if (sort == 'sortField=recipientType&sortOrder=asc') {
+                if (sort.includes('asc') && sort.includes('recipientType')) {
                   setSort('sortField=recipientType&sortOrder=desc');
                 } else setSort('sortField=recipientType&sortOrder=asc');
               }}
             >
-              Recipient
+              Recipient{' '}
+              <span className='cursor-pointer font-semibold text-gray-800'>
+                {sort.includes('asc') && sort.includes('recipientType')
+                  ? ' (DSC ▲)'
+                  : '(ASC ▼)'}
+              </span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
