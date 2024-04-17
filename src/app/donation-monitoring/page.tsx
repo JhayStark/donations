@@ -50,10 +50,13 @@ export default function Home() {
   const [pageNumber, setPageNumber] = useState(1);
   const [sort, setSort] = useState('');
   const [search, setSearch] = useState('');
+  const [searchField, setSearchField] = useState('name');
   const [debouncedSearch] = useDebounce(search, 1000);
 
+  console.log(searchField);
+
   const { data, error, isLoading } = useSWR(
-    `/donations?page=${pageNumber}&search=${debouncedSearch}&${sort}`,
+    `/donations?page=${pageNumber}&searchField=${searchField}&search=${debouncedSearch}&${sort}`,
     fetcher
   );
   const { data: statsData } = useSWR(`/donations/stats`, fetcher);
@@ -97,6 +100,7 @@ export default function Home() {
         sort={sort}
         search={search}
         setSearch={setSearch}
+        setSearchField={setSearchField}
       />
     </>
   );

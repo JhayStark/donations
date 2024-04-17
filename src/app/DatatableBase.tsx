@@ -27,6 +27,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 interface DatatableBaseProps {
   data: {
@@ -50,6 +51,7 @@ interface DatatableBaseProps {
   sort: string;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setSearchField: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const DatatableBase = ({
@@ -60,17 +62,43 @@ const DatatableBase = ({
   sort,
   search,
   setSearch,
+  setSearchField,
 }: DatatableBaseProps) => {
   const router = useRouter();
   return (
     <>
-      <div className='flex gap-2 justify-end items-center'>
-        <Input
-          className='md:max-w-48 text-black'
-          placeholder='Search by name'
-          onChange={e => setSearch(e.target.value)}
-          value={search}
-        />
+      <div className='flex gap-2 flex-col justify-end items-end'>
+        <div className='items-end flex'>
+          <div className='flex items-center'>
+            <p className='font-medium'>Search by:</p>
+            <ToggleGroup type='single' className='px-2'>
+              <ToggleGroupItem
+                value='name'
+                onClick={() => setSearchField('name')}
+              >
+                Name
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value='contact'
+                onClick={() => setSearchField('contact')}
+              >
+                Contact
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value='recipient'
+                onClick={() => setSearchField('recipientName')}
+              >
+                Recipient
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+          <Input
+            className='md:max-w-48 text-black'
+            placeholder='Search.....'
+            onChange={e => setSearch(e.target.value)}
+            value={search}
+          />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger className='p-2 border-blue-700 border-2 rounded'>
             Sort by
