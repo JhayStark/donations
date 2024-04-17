@@ -18,6 +18,14 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { formatCurrencyToGHS } from '@/lib/utils';
+import { FilePenLine, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 interface DatatableBaseProps {
   data: {
@@ -32,19 +40,79 @@ interface DatatableBaseProps {
       amount: string;
       recipientType: string;
       recipientName: string;
+      createdOn: string;
     }[];
   };
   pageNumber: number;
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  setSort: React.Dispatch<React.SetStateAction<string>>;
+  sort: string;
 }
 
 const DatatableBase = ({
   data,
   pageNumber,
   setPageNumber,
+  setSort,
+  sort,
 }: DatatableBaseProps) => {
+  const router = useRouter();
   return (
     <>
+      <div className='flex gap-2 justify-end items-center'>
+        <DropdownMenu>
+          <DropdownMenuTrigger className='p-2 border-blue-700 border-2 rounded'>
+            Sort by
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              onClick={() => {
+                if (sort == 'sortField=name&sortOrder=asc') {
+                  setSort('sortField=name&sortOrder=desc');
+                } else setSort('sortField=name&sortOrder=asc');
+              }}
+            >
+              Name
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                if (sort == 'sortField=amount&sortOrder=asc') {
+                  setSort('sortField=amount&sortOrder=desc');
+                } else setSort('sortField=amount&sortOrder=asc');
+              }}
+            >
+              Amount
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                if (sort == 'sortField=contact&sortOrder=asc') {
+                  setSort('sortField=contact&sortOrder=desc');
+                } else setSort('sortField=contact&sortOrder=asc');
+              }}
+            >
+              Contact
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                if (sort === 'sortField=createdOn&sortOrder=asc') {
+                  setSort('sortField=createdOn&sortOrder=desc');
+                } else setSort('sortField=createdOn&sortOrder=asc');
+              }}
+            >
+              Date Created
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                if (sort == 'sortField=recipientType&sortOrder=asc') {
+                  setSort('sortField=recipientType&sortOrder=desc');
+                } else setSort('sortField=recipientType&sortOrder=asc');
+              }}
+            >
+              Recipient
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <Table className='min-h-64 max-h-[calc(100vh-350px)]  '>
         {!data && (
           <TableCaption>
@@ -56,6 +124,11 @@ const DatatableBase = ({
             <TableHead className='text-white'>Donor Name</TableHead>
             <TableHead className='text-white'>Recipient</TableHead>
             <TableHead className='text-right text-white'>Amount</TableHead>
+            <TableHead className='text-right text-white'>Contact</TableHead>
+            <TableHead className='text-right text-white'>
+              Date Donated
+            </TableHead>
+            <TableHead className='text-right text-white'>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -67,6 +140,20 @@ const DatatableBase = ({
               </TableCell>
               <TableCell className='text-right'>
                 {formatCurrencyToGHS(parseInt(donor.amount))}
+              </TableCell>
+              <TableCell className='text-right'>{donor.contact}</TableCell>
+              <TableCell className='text-right'>
+                {new Date(donor.createdOn).toLocaleDateString()}
+              </TableCell>
+              <TableCell className='text-right'>
+                <div className='flex items-center gap-2 justify-end'>
+                  <FilePenLine
+                    size={20}
+                    className='text-orange-500'
+                    onClick={() => router.push(`/${donor?._id}`)}
+                  />
+                  {/* <Trash2 size={20} className='text-red-900 ' /> */}
+                </div>
               </TableCell>
             </TableRow>
           ))}

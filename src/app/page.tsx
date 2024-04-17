@@ -143,7 +143,7 @@ const Page = () => {
         </div>
 
         <Button
-          className='bg-white text-black hover:text-white w-full h-16'
+          className='bg-white text-black hover:text-white w-full h-16 my-2'
           type='submit'
         >
           {!loading ? (

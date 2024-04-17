@@ -47,9 +47,10 @@ const StatsCard = ({
 
 export default function Home() {
   const [pageNumber, setPageNumber] = useState(1);
+  const [sort, setSort] = useState('');
 
   const { data, error, isLoading } = useSWR(
-    `/donations?page=${pageNumber}`,
+    `/donations?page=${pageNumber}&${sort}`,
     fetcher
   );
   const { data: statsData } = useSWR(`/donations/stats`, fetcher);
@@ -89,6 +90,8 @@ export default function Home() {
         data={data}
         setPageNumber={setPageNumber}
         pageNumber={pageNumber}
+        setSort={setSort}
+        sort={sort}
       />
     </>
   );
