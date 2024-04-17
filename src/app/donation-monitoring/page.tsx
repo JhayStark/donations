@@ -8,6 +8,7 @@ import api from '@/lib/axiosInstance';
 import useSWR from 'swr';
 import { formatCurrencyToGHS } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { useDebounce } from 'use-debounce';
 
 const fetcher = (url: string) => api.get(url).then(res => res.data);
 
@@ -48,9 +49,11 @@ const StatsCard = ({
 export default function Home() {
   const [pageNumber, setPageNumber] = useState(1);
   const [sort, setSort] = useState('');
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebounce(search, 1000);
 
   const { data, error, isLoading } = useSWR(
-    `/donations?page=${pageNumber}&${sort}`,
+    `/donations?page=${pageNumber}&search=${debouncedSearch}&${sort}`,
     fetcher
   );
   const { data: statsData } = useSWR(`/donations/stats`, fetcher);
@@ -92,6 +95,8 @@ export default function Home() {
         pageNumber={pageNumber}
         setSort={setSort}
         sort={sort}
+        search={search}
+        setSearch={setSearch}
       />
     </>
   );

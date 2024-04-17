@@ -26,6 +26,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 
 interface DatatableBaseProps {
   data: {
@@ -47,6 +48,8 @@ interface DatatableBaseProps {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
   setSort: React.Dispatch<React.SetStateAction<string>>;
   sort: string;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const DatatableBase = ({
@@ -55,11 +58,19 @@ const DatatableBase = ({
   setPageNumber,
   setSort,
   sort,
+  search,
+  setSearch,
 }: DatatableBaseProps) => {
   const router = useRouter();
   return (
     <>
       <div className='flex gap-2 justify-end items-center'>
+        <Input
+          className='md:max-w-48 text-black'
+          placeholder='Search by name'
+          onChange={e => setSearch(e.target.value)}
+          value={search}
+        />
         <DropdownMenu>
           <DropdownMenuTrigger className='p-2 border-blue-700 border-2 rounded'>
             Sort by
