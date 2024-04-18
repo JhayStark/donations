@@ -59,7 +59,10 @@ export default function Home() {
     `/donations?page=${pageNumber}&searchField=${searchField}&search=${debouncedSearch}&${sort}`,
     fetcher
   );
-  const { data: statsData } = useSWR(`/donations/stats`, fetcher);
+  const { data: statsData } = useSWR(
+    `/donations/stats?searchField=${searchField}&search=${debouncedSearch}`,
+    fetcher
+  );
 
   return (
     <>
